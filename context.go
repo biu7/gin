@@ -696,6 +696,11 @@ func (c *Context) ShouldBind(obj any) error {
 	return c.ShouldBindWith(obj, b)
 }
 
+func (c *Context) ShouldBindWithTag(obj any, tag string) error {
+	b := binding.Default(c.Request.Method, c.ContentType())
+	return b.Bind(c.Request, obj, tag)
+}
+
 // ShouldBindJSON is a shortcut for c.ShouldBindWith(obj, binding.JSON).
 func (c *Context) ShouldBindJSON(obj any) error {
 	return c.ShouldBindWith(obj, binding.JSON)
@@ -738,7 +743,7 @@ func (c *Context) ShouldBindUri(obj any) error {
 // ShouldBindWith binds the passed struct pointer using the specified binding engine.
 // See the binding package.
 func (c *Context) ShouldBindWith(obj any, b binding.Binding) error {
-	return b.Bind(c.Request, obj)
+	return b.Bind(c.Request, obj, "")
 }
 
 // ShouldBindBodyWith is similar with ShouldBindWith, but it stores the request

@@ -18,7 +18,7 @@ func (tomlBinding) Name() string {
 	return "toml"
 }
 
-func (tomlBinding) Bind(req *http.Request, obj any) error {
+func (tomlBinding) Bind(req *http.Request, obj any, tag string) error {
 	return decodeToml(req.Body, obj)
 }
 

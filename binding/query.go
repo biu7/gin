@@ -12,9 +12,12 @@ func (queryBinding) Name() string {
 	return "query"
 }
 
-func (queryBinding) Bind(req *http.Request, obj any) error {
+func (queryBinding) Bind(req *http.Request, obj any, tag string) error {
 	values := req.URL.Query()
-	if err := mapForm(obj, values); err != nil {
+	if tag == "" {
+		tag = "form"
+	}
+	if err := mapForm(obj, values, tag); err != nil {
 		return err
 	}
 	return validate(obj)

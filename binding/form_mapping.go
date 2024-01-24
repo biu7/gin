@@ -30,8 +30,8 @@ func mapURI(ptr any, m map[string][]string) error {
 	return mapFormByTag(ptr, m, "uri")
 }
 
-func mapForm(ptr any, form map[string][]string) error {
-	return mapFormByTag(ptr, form, "form")
+func mapForm(ptr any, form map[string][]string, tag string) error {
+	return mapFormByTag(ptr, form, tag)
 }
 
 func MapFormWithTag(ptr any, form map[string][]string, tag string) error {

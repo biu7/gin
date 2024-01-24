@@ -30,7 +30,7 @@ func (jsonBinding) Name() string {
 	return "json"
 }
 
-func (jsonBinding) Bind(req *http.Request, obj any) error {
+func (jsonBinding) Bind(req *http.Request, obj any, tag string) error {
 	if req == nil || req.Body == nil {
 		return errors.New("invalid request")
 	}

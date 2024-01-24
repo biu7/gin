@@ -16,17 +16,19 @@ func (headerBinding) Name() string {
 	return "header"
 }
 
-func (headerBinding) Bind(req *http.Request, obj any) error {
-
-	if err := mapHeader(obj, req.Header); err != nil {
+func (headerBinding) Bind(req *http.Request, obj any, tag string) error {
+	if tag == "" {
+		tag = "header"
+	}
+	if err := mapHeader(obj, req.Header, tag); err != nil {
 		return err
 	}
 
 	return validate(obj)
 }
 
-func mapHeader(ptr any, h map[string][]string) error {
-	return mappingByPtr(ptr, headerSource(h), "header")
+func mapHeader(ptr any, h map[string][]string, tag string) error {
+	return mappingByPtr(ptr, headerSource(h), tag)
 }
 
 type headerSource map[string][]string
